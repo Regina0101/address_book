@@ -54,7 +54,6 @@ class AddressBook(UserDict):
         if name in self.data:
             del self.data[name]
 
-# Example usage
 if __name__ == "__main__":
     book = AddressBook()
 
