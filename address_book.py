@@ -5,7 +5,7 @@ class Field:
         self.value = value
 
     def __str__(self):
-        return str(self.value)
+        return self.value
 
 class Name(Field):
     pass
@@ -27,12 +27,12 @@ class Record:
         self.phones.append(Phone(phone))
 
     def remove_phone(self, phone):
-        self.phones = [p for p in self.phones if str(p) != phone]
+        self.phones = [p for p in self.phones if p.value != phone]
 
     def edit_phone(self, old_phone, new_phone):
         phone_found = False
         for p in self.phones:
-            if str(p) == old_phone:
+            if p.value == old_phone:
                 if len(new_phone) != 10 or not new_phone.isdigit():
                     raise ValueError
                 p.value = new_phone
@@ -42,12 +42,12 @@ class Record:
 
     def find_phone(self, phone):
         for p in self.phones:
-            if str(p) == phone:
+            if p.value == phone:
                 return p
-            return None
+        return None
 
     def __str__(self):
-        return f"Contact name: {self.name.value}, phones: {'; '.join(str(p) for p in self.phones)}"
+        return f"Contact name: {self.name.value}, phones: {'; '.join(p.value for p in self.phones)}"
 
 class AddressBook(UserDict):
     def add_record(self, record):
